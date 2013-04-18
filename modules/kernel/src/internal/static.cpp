@@ -16,4 +16,7 @@ typedef bool (*ParticleFunction)(Particle*);
 base::Vector<std::pair<ParticleFunction, ParticleFunction> >
 particle_validators;
 
+
+base::map<std::string, base::Pointer<Undecorator> > undecorators;
+
 IMPKERNEL_END_INTERNAL_NAMESPACE

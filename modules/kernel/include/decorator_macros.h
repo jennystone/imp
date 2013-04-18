@@ -13,43 +13,9 @@
 #include <IMP/base/log_macros.h>
 #include <IMP/base/showable_macros.h>
 #include <IMP/base/warning_macros.h>
+#include <IMP/kernel/internal/static.h>
 
-/** \name Macros to aid with implementing decorators
-
-    These macros are here to aid in implementation of IMP::Decorator
-    objects.  The first two declare/define the expected methods. The
-    remainder help implement basic functions.
-
-    @{
-*/
-
-//! Define the basic things needed by a Decorator.
-/** The macro defines the following methods
-    - a default constructor Decorator::Decorator()
-
-    It also declares:
-    - IMP::Decorator::show()
-    - IMP::Decorator::decorate_particle()
-    - IMP::Decorator::Decorator()
-
-    Finally, it expects methods corresponding to
-    - IMP::Decorator::particle_is_instance()
-    - IMP::Decorator::setup_particle()
-
-    You also implement static methods \c get_x_key() to return each of the
-    keys used. These static methods, which must be defined in the \c .cpp
-    file, should declare the key itself as a \c static member variable to
-    avoid initializing the key if the decorator is not used.
-
-    See IMP::Decorator for a more detailed description
-    of decorators.
-
-    \param[in] Name is the name of the decorator, such as XYZR
-    \param[in] Parent The class name for the parent of this class,
-    typically Decorator
-
-    \see IMP_DECORATOR_WITH_TRAITS()
-*/
+/** Use IMP_DECORATOR_2() as this macro is deprecated.*/
 #define IMP_DECORATOR(Name, Parent)                                     \
   public:                                                               \
   /* Should be private but SWIG accesses it through the comparison
@@ -78,6 +44,14 @@ static Name decorate_particle(::IMP::kernel::Particle *p) {             \
 }                                                                       \
 IMP_SHOWABLE(Name)
 
+/** \name Macros to aid with implementing decorators
+
+    These macros are here to aid in implementation of IMP::Decorator
+    objects.  The first two declare/define the expected methods. The
+    remainder help implement basic functions.
+
+    @{
+*/
 
 //! Define the basic things needed by a Decorator which has a traits object.
 /** This macro is the same as IMP_DECORATOR() except that an extra object

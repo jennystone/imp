@@ -47,7 +47,7 @@ Dealing with decorators and particles has two main parts
 
 To set up a particle to be used with the IMP::core::XYZ decorator we do
 \code
-d0= IMP.core.XYZ.setup_particle(p, IMP.algebra.Vector3D(0,2,3))
+d0= IMP.core.XYZ.setup_particle(m, pi, IMP.algebra.Vector3D(0,2,3))
 \endcode
 The method calls also decorates the particle and returns the decorator
 which can now be used to manipulate the particle. For example we can
@@ -244,27 +244,27 @@ public:
   legal to construct an instance of the decorator with that particle.
   If not, setup_particle() must be called first.
   \code
-  IMP::Particle *p = new IMP::Particle(m);
+  IMP::kernel::ParticleIndex pi = m->add_particle("My Particle");
   // it is false
-  std::cout << IMP::core::XYZ::particle_is_instance(p) << std::endl;
+  std::cout << IMP::core::XYZ::particle_is_instance(m, pi) << std::endl;
   // As a result this is an error
-  IMP::core::XYZ d(p);
+  IMP::core::XYZ d(m, pi);
   // now set it up
-  IMP::core::XYZ(p);
+  IMP::core::XYZ(m, pi);
   // now it is true
-  std::cout << IMP::core::XYZ::particle_is_instance(p) << std::endl;
+  std::cout << IMP::core::XYZ::particle_is_instance(m, pi) << std::endl;
   // and now this code is OK
-  IMP::core::XYZ d(p);
+  IMP::core::XYZ d(m, pi);
   \endcode
   */
-  static bool particle_is_instance(Particle *p);
+  static bool particle_is_instance(Model *m, ParticleIndex pi);
 
   /** Create an instance of the Decorator from the particle that has
       already been set up. The particle must have been set up already
       (eg particle_is_instance(p) must be true), but this is not
       necessarily checked.
   */
-  Decorator(Particle *p);
+  Decorator(Model *m, ParticleIndex pi);
   /** The default constructor must be defined and create a nullptr decorator,
       analogous to a \c nullptr pointer in C++ or a \c None object in Python.
   */

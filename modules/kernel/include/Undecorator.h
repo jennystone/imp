@@ -24,13 +24,14 @@ class Model;
 */
 class IMPKERNELEXPORT Undecorator: public base::Object {
   Model *m_;
+ protected:
+  Model *get_model() const {return m_;}
  public:
   Undecorator(Model *m, std::string name);
   virtual void teardown(ParticleIndex pi) const = 0;
 };
 
 IMP_OBJECTS(Undecorator, Undecorators);
-
 
 IMPKERNEL_END_NAMESPACE
 
